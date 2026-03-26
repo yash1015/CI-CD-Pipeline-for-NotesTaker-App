@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Note — NoteStack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <header>
+    <div class="logo">📋 NoteStack</div>
+    <a href="/" class="back-link">← Back</a>
+  </header>
+
+  <main>
+    <section class="add-section">
+      <h2 class="edit-title">Edit Note</h2>
+      <form action="/edit/{{ note.id }}" method="POST" class="note-form">
+        <input type="text" name="title" value="{{ note.title }}" maxlength="80" required />
+        <textarea name="content" rows="6">{{ note.content }}</textarea>
+        <div class="form-footer">
+          <div class="color-picker">
+            <label>Color:</label>
+            <input type="color" name="color" value="{{ note.color }}" />
+          </div>
+          <button type="submit" class="btn-add">💾 Save Changes</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>NoteStack — simple notes, always there.</p>
+  </footer>
+
+</body>
+</html>
