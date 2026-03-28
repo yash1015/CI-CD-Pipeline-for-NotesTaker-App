@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/yash1015/CI-CD-Pipeline-for-NotesTaker-App.git'
+                git branch: 'main' , url: 'https://github.com/yash1015/CI-CD-Pipeline-for-NotesTaker-App.git'
             }
         }
 
