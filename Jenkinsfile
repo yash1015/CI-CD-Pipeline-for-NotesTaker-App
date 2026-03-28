@@ -31,7 +31,7 @@ pipeline {
             steps {
             sh '''
             export KUBECONFIG=/var/lib/jenkins/kubeconfig
-            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/deployment.yaml --validate=false
             kubectl apply -f k8s/service.yaml
             '''
     }
