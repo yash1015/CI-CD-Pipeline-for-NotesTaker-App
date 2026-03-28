@@ -5,31 +5,32 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/yash1015/CI-CD-Pipeline-for-NotesTaker-App.git'
+                git 'https://github.com/yash1015/CI-CD-Pipeline-for-NotesTaker-App.git'
             }
         }
 
-        stage('Remove Old Container') {
+        stage('Build Image') {
             steps {
-                sh 'docker rm -f notes-container || true'
+                sh 'docker build -t yashkangude87/notes-app:latest .'
             }
         }
 
-        stage('Remove Old Image') {
+        stage('Login to Docker Hub') {
             steps {
-                sh 'docker rmi -f notes-app || true'
+                sh 'docker login -u yashkangude87 -p Kangude@7621'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Push Image') {
             steps {
-                sh 'docker build -t notes-app .'
+                sh 'docker push yashkangude87/notes-app:latest'
             }
         }
 
-        stage('Run Container') {
+        stage('Deploy to Kubernetes') {
             steps {
-                sh 'docker run -d -p 5000:5000 --name notes-container notes-app'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
             }
         }
     }
