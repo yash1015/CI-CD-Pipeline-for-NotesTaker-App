@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Login to Docker Hub for build') {
             steps {
                 sh 'docker login -u yashkangude87 -p Kangude@7621'
             }
